@@ -5,9 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mystery+Quest&family=Patrick+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <main>
+        <h1>Rock, Paper, Scissors!</h1>
+        <div class="top-content-wrapper">
+            <div class="game-score-wrapper">
+                You
+                <span id="humanScore">0</span>
+                . .
+                <span id="computerScore">0</span>
+                PC
+            </div>
+            <div class="round-result-wrapper">
+                <span id="round-result-display">
+                    A classic. First to 5 wins.
+                </span>
+                <img class="rock" src="/images/rock.png" alt="Rock">
+                <img class="paper" src="/images/paper.png" alt="Paper">
+                <img class="scissors" src="/images/scissors.png" alt="Scissors">
+                <img src="/images/Win Icon.png" alt="Winner" class="win">
+                <img src="/images/Lose Icon.png" alt="Loser" class="loss">
+            </div>
+        </div>
+        <div class="bottom-content-wrapper">
+            <span>
+                Click rock, paper, or scissors
+            </span>
+            <div class="human-choice-wrapper">
+                <div id="rock">
+                    <img src="/images/rock.png" alt="Rock">
+                </div>
+                <div id="paper">
+                    <img src="/images/paper.png" alt="Paper">
+                </div>
+                <div id="scissors">
+                    <img src="/images/scissors.png" alt="Scissors">
+                </div>
+            </div>
+        </div>
+    </main>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 

@@ -1,3 +1,40 @@
+/******************************************
+/* ROCK , PAPER , SCISSORS!
+/*******************************************/
+
+
+
+
+// Human Computer Score (Number)
+let humanScore = 0;
+let computerScore = 0;
+
+// Human Computer Score (Visual Number)
+const displayHumanScore = document.querySelector('#humanScore');
+const displayComputerScore = document.querySelector('#computerScore');
+
+// List of All Elements
+const allElements = document.querySelectorAll('*');
+
+// Round Result Text
+const displayedResult = document.querySelector('#round-result-display');
+
+// Round Result Background 
+const displayedResultBackground = document.querySelector('.round-result-wrapper');
+
+// Rock Paper Scissors Human Selection (Image)
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+// Rock Paper Scissors Computer Selection (Image)
+const computerRockImage = document.querySelector('.rock');
+const computerPaperImage = document.querySelector('.paper');
+const computerScissorsImage = document.querySelector('.scissors');
+
+// Win / Loss Icon
+const winIcon = document.querySelector('.win');
+const lossIcon = document.querySelector('.loss');
 
 
 
@@ -5,125 +42,121 @@
 
 
 
-// Your game will be played against the computer. You will write a function that randomly returns “rock”, “paper” or “scissors”.
-let humanScore = 0
-let computerScore = 0
 
-
+// Get computer round choice
 function getComputerChoice() {
     let computerChoice = Math.random();
     if (computerChoice < 0.34) {
+        computerRockImage.style.display = 'block';
+        computerPaperImage.style.display = 'none';
+        computerScissorsImage.style.display = 'none';
         return "ROCK";
     } else if (computerChoice > 0.33 && computerChoice > 0.67) {
+        computerPaperImage.style.display = 'block';
+        computerRockImage.style.display = 'none';
+        computerScissorsImage.style.display = 'none';
         return "PAPER";
     } else {
+        computerScissorsImage.style.display = 'block';
+        computerRockImage.style.display = 'none';
+        computerPaperImage.style.display = 'none';
         return "SCISSORS";
-    }
-}
+    };
+};
 
-function getHumanChoice() {
-    let humanChoice = prompt('Choose: Rock, Paper, or Scissors');
-    humanChoice = humanChoice.toUpperCase();
-    while (humanChoice != "ROCK" && humanChoice != "PAPER" && humanChoice != "SCISSORS") {
-        humanChoice = prompt('Error: Choose: Rock, Paper, or Scissors');
-        humanChoice = humanChoice.toUpperCase();
-    }
-    return humanChoice
-}
-
-
-
-function playGame() {
-    while (humanScore < 3 && computerScore < 3) {
-        playRound(getHumanChoice(),getComputerChoice())
-        //humanChoice = undefined;
-        //computerChoice = undefined;
-        //console.log(humanChoice)
-    }
-    if (humanScore > computerScore) {
-        alert(`You Win! Your score is ${humanScore} and the computer score is ${computerScore}.`)
-    } else {
-        alert(`You Lose! Your score is ${humanScore} and the computer score is ${computerScore}.`)
-    }
-}
+// Human "Rock" Selection
+    rock.addEventListener('click' , () => {
+        if (computerScore < 5 && humanScore < 5) {
+            humanChoice = "ROCK";
+            playRound(humanChoice,getComputerChoice());
+            displayHumanScore.textContent = humanScore;
+            displayComputerScore.textContent = computerScore;
+            checkScore();
+        };
+    });
 
 
+// Human "Paper" Selection
+    paper.addEventListener('click' , () => {
+        if (computerScore < 5 && humanScore < 5) {
+            humanChoice = "PAPER";
+            playRound(humanChoice,getComputerChoice());
+            displayHumanScore.textContent = humanScore;
+            displayComputerScore.textContent = computerScore;
+            checkScore();
+        } ;
+    });
 
+// Human "Scissors" Selection
+    scissors.addEventListener('click' , () => {
+        if (computerScore < 5 && humanScore < 5) {
+            humanChoice = "SCISSORS";
+            playRound(humanChoice,getComputerChoice());
+            displayHumanScore.textContent = humanScore;
+            displayComputerScore.textContent = computerScore;
+            checkScore();
+        } 
+    });
+    
+// Check Score (Concludes Game If Human/PC Has 5 Points)
+function checkScore () {
+    if (computerScore == 5 || humanScore == 5) {
+        displayedResult.textContent = "Game Complete.";
+        computerRockImage.style.display = 'none';
+        computerPaperImage.style.display = 'none';
+        computerScissorsImage.style.display = 'none';
+        if (humanScore > computerScore) {
+            document.querySelector('h1').textContent = `You Win! Your score is ${humanScore} and the computer score is ${computerScore}.`;
+            winIcon.style.display = 'block';
+            displayedResultBackground.style.backgroundColor = "Green"
+        } else {
+            document.querySelector('h1').textContent = `You Lose! Your score is ${humanScore} and the computer score is ${computerScore}.`;
+            lossIcon.style.display = 'block';
+            displayedResultBackground.style.backgroundColor = "Gray";
+        };
+        setTimeout( () => {
+            allElements.forEach(element => {
+                element.style.filter = 'grayscale(100%)';
+            });
+        } , 5000);
+    };
+};
+
+// Play Round (Dispay Round Results, Calculate Game Score)
 function playRound(humanChoice,computerChoice) {
-    console.log(humanChoice)
-    console.log(computerChoice)
+    console.log(humanChoice + " Human")
+    console.log(computerChoice + " PC")
     if (humanChoice == "PAPER" && computerChoice == "ROCK") {
-        console.log(`The Computer Choice is ${computerChoice}`)
-        console.log('You win! Paper beats rock!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice}. You win, paper beats rock!`;
+        displayedResultBackground.style.backgroundColor = "Green"
         humanScore = humanScore + 1
     } else if (computerChoice == "PAPER" && humanChoice == "ROCK") {
-        console.log(`The Computer Choice is ${computerChoice}`)  
-        console.log('You lose! Paper beats rock!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice}. You lose, paper beats rock!'`;
+        displayedResultBackground.style.backgroundColor = "Red"
         computerScore = computerScore + 1;
     } else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
-        console.log(`The Computer Choice is ${computerChoice}`)  
-        console.log('You win! Rock beats scissors!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice} You win, rock beats scissors!`;
+        displayedResultBackground.style.backgroundColor = "Green"
         humanScore = humanScore + 1;
     } else if (computerChoice == "ROCK" && humanChoice == "SCISSORS") {
-        console.log('You lose! Rock beats scissors!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice}. You lose, rock beats scissors!`;
+        displayedResultBackground.style.backgroundColor = "Red"
         computerScore = computerScore + 1;
     } else if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
-        console.log(`The Computer Choice is ${computerChoice}`)  
-        console.log('You win! Scissors beats paper!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice}. You win, scissors beats paper!`
+        displayedResultBackground.style.backgroundColor = "Green"
         humanScore = humanScore + 1;
     } else if (computerChoice == "SCISSORS" && humanChoice == "PAPER") {
-        console.log(`The Computer Choice is ${computerChoice}`)  
-        console.log('You lose! Scissors beats paper!');
+        displayedResult.textContent = `The Computer Choice is ${computerChoice}. You lose, scissors beats paper!` 
+        displayedResultBackground.style.backgroundColor = "Red"
         computerScore = computerScore + 1;
     }  else {
-        alert('DRAW!')
+        displayedResult.textContent = "DRAW!"
+        displayedResultBackground.style.backgroundColor = "transparent"
     }  
 }
 
 
-// Variable & Function Declarations
-
-
-// 1. Start the game 
-
-
-
-
-
-
-// Get round human choice
-
-
-
-
-// getComputerChoice will randomly return one of the following string values: “rock”, “paper” or “scissors”.
-
-// Generate a random number --> Assign that number to a variable  --> compare the random number; if between 0-0.33 = rock, if between 0.34-0.66 paper, if between 0.67-0.99 scissors.
-
-
-
-
-
-
-// Your game will be played by a human player. You will write a function that takes the user choice and returns it.
-// Have user input choice, check to see if entry is valid, then return the value. Give an alert 
-
-
-
-
-
-// keep looping to capture answer until it is correct 
-
-
-
-
-// Step 4: Declare the players score variables Your game will keep track of the players score. You will write variables to keep track of the players score. Create two new variables named humanScore and computerScore in the global scope. Initialize those variables with the value of 0.
-
-
-
-// Your game will be played round by round. You will write a function that takes the human and computer player choices as arguments, plays a single round, increments the round winner’s score and logs a winner announcement.
-
-// Paper beats rock, rock beats scissors, scissors beats paper 
 
 
 
@@ -132,7 +165,9 @@ function playRound(humanChoice,computerChoice) {
 
 
 
-// Write the logic to play the entire game
+
+
+
 
 
 
