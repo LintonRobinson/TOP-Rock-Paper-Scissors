@@ -138,6 +138,13 @@ main {
     -webkit-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 22px -4px rgba(0,0,0,0.75);
+    transition: 0.5s;
+    transform: scale(1);
+}
+/* Human Choice Rock, Paper, Scissors Image Wrapper Hover Styling */
+#rock:hover , #paper:hover , #scissors:hover {
+    transition: 0.5s;
+    transform: scale(1.1);
 }
 
 /* Human Choice Rock, Paper, Scissors Image Styling */
